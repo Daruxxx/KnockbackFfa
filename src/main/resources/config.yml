@@ -1,0 +1,69 @@
+JOIN-MESSAGE: "&8[&a+&8] &7%player% ha entrado al servidor"
+QUIT-MESSAGE: "&8[&c-&8] &7%player% ha salido del servidor"
+SCOREBOARD:
+  title: "&b&lKBFFA"
+  ticks: 20
+  lines:
+    - "&8 "
+    - "&eMapa: &f%mapa%"
+    - "&6Tiempo: &f%tiempo%"
+    - "&2"
+    - "&eKills: &f%kills%"
+    - "&6Racha: &f%racha%"
+    - "&eMuertes: &f%muertes%"
+    - "&6Monedas: &f%monedas%"
+    - "&1"
+    - "&eJugando: &f%online%"
+    - "&c"
+    - "&binfection.fun"
+STICK:
+  name: "&6Palo mágico"
+  lore:
+    - ""
+    - "&7Usa este palo mágico"
+    - "&7Para derribar a tus enemigos"
+    - ""
+  empuje: 3
+SPEED:
+  name: "&bSpeed"
+  lore:
+    - ""
+    - "&7Usa este item para"
+    - "&7Correr más rápido"
+    - ""
+  speed: 3
+ELIMINAR-BLOQUES: 10 # Tiempo (en segundos) que tarda en eliminarse un bloque cuando alguien lo pone
+COOLDOWNS:
+  ENDERPEARL: 10
+  SPEED: 15
+BLOQUES-PRECIO:
+  STONE: 0
+  COBBLESTONE: 10
+  SANDSTONE: 20
+  GRASS: 20
+  DIAMOND_ORE: 100
+  QUARTZ_BLOCK: 300
+  HAY_BLOCK: 100
+  ENDER_STONE: 100
+  SNOW: 200
+  TNT: 200
+  WOOD: 50
+  LEAVES: 100
+  OBSIDIAN: 150
+Monedas:
+  kill: 10
+  muerte: -5
+  rachas:
+    2: 5
+    5: 20
+    10: 100
+    15: 150
+Encantamientos-arco:
+  ARROW_DAMAGE: 3
+  ARROW_KNOCKBACK: 1
+Lanza-Nieve:
+  precio: 300
+  glow: true
+Lanza-tnt:
+  precio: 500
+  name: "&6LanzaTnt"

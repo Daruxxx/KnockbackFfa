@@ -1,0 +1,10 @@
+name: KbFFA
+version: '${project.version}'
+main: me.darux.kbffa.Main
+authors: [ D4RUX ]
+description: Core of KnockBackFFA
+website: https://daruxdev.es
+commands:
+  arena:
+  kbffa:
+  suicide:
