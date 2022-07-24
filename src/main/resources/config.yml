@@ -67,3 +67,10 @@ Lanza-Nieve:
 Lanza-tnt:
   precio: 500
   name: "&6LanzaTnt"
+Particles:
+  prices:
+    LAVA: 150
+    HEART: 100
+    NOTE: 90
+    WATER_BUBBLE: 200
+    VILLAGER_ANGRY: 100

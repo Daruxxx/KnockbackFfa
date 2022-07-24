@@ -17,6 +17,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
+import org.inventivetalent.particle.ParticleEffect;
 
 public class EventCanceler implements Listener {
 
@@ -52,6 +53,10 @@ public class EventCanceler implements Listener {
         if(e.getPlayer().getLocation().getY()>100 && e.getTo().getY()<=100){
             e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.NOTE_PLING,10,10);
             JugadorUtils.comenzarJugar(e.getPlayer());
+        }
+        if(e.getPlayer().getLocation().getY()>76 && e.getTo().getY()<=76){
+            e.getPlayer().setHealth(0);
+
         }
     }
 

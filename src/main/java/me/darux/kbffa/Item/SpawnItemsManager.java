@@ -5,10 +5,12 @@ import me.darux.kbffa.File.FileCreator;
 import me.darux.kbffa.Jugador.Jugador;
 import me.darux.kbffa.Jugador.JugadorUtils;
 import me.darux.kbffa.Main;
+import me.darux.kbffa.Trails.ParticleUtils;
 import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -19,6 +21,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.inventivetalent.particle.ParticleEffect;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,7 +138,8 @@ public class SpawnItemsManager implements Listener {
                 e.getPlayer().openInventory(inv);
             }else if(e.getPlayer().getItemInHand().getType().equals(Material.EXPLOSIVE_MINECART)){
                 Inventory inv=Bukkit.createInventory(null,27,Utils.translate("&bAjustes"));
-                ItemStack item=new ItemStack(Material.SANDSTONE);
+                ItemStack item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjVlNzFhZWQwMTFmNDQxM2M1MzI3NWU3M2ZmN2MzOTU2ZDdkZWY2ODQ2OGJmZWNhNjExYjE0ZGMxN2I2MDllOCJ9fX0=");
+
                 ItemMeta meta=item.getItemMeta();
                 meta.setDisplayName(Utils.translate("&6Bloques"));
                 List<String> lore=new ArrayList<>();
@@ -149,10 +153,11 @@ public class SpawnItemsManager implements Listener {
                 }
                 meta.setLore(loret);
                 item.setItemMeta(meta);
-                inv.setItem(11,item);
+                inv.setItem(10,item);
 
 
-                item=new ItemStack(Material.BOW);
+                item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU0MzUyNjgwZDBiYjI5YjkxMzhhZjc4MzMwMWEzOTFiMzQwOTBjYjQ5NDFkNTJjMDg3Y2E3M2M4MDM2Y2I1MSJ9fX0=");
+
                 meta=item.getItemMeta();
                 meta.setDisplayName(Utils.translate("&6Gadget"));
                 lore.clear();
@@ -166,7 +171,19 @@ public class SpawnItemsManager implements Listener {
                 }
                 meta.setLore(loret);
                 item.setItemMeta(meta);
-                inv.setItem(15,item);
+                inv.setItem(16,item);
+
+                 item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjE3MDg1NzRlN2U5YTZhNzZjOWFhODIxNDc5N2IxYWMzODk1MDY4OWVmOWNkZGExOGQ1MDM2MjM5OGI2MTAxZCJ9fX0=");
+                meta=item.getItemMeta();
+                meta.setDisplayName(Utils.translate("&bPartículas"));
+                lore.clear();
+                lore.add(Utils.translate("&8Click para comprar"));
+                lore.add(Utils.translate("&8partículas que todos verán"));
+                lore.add("");
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+                inv.setItem(13,item);
+
 
 
                 e.getPlayer().openInventory(inv);
@@ -178,7 +195,7 @@ public class SpawnItemsManager implements Listener {
     public void onClick(InventoryClickEvent e){
         if(e.getInventory().getName().equals(Utils.translate("&bAjustes"))){
             if(e.getInventory().getItem(e.getSlot())==null) return;
-            if(e.getInventory().getItem(e.getSlot()).getType().equals(Material.SANDSTONE)){
+            if(e.getSlot()==10){
                 Inventory inv=Bukkit.createInventory(null,27,Utils.translate("&6Bloques"));
                 FileCreator config=Main.getInstance().getConfig();
                 for(String key : Main.getInstance().getConfig().getConfigurationSection("BLOQUES-PRECIO").getKeys(false)){
@@ -212,7 +229,7 @@ public class SpawnItemsManager implements Listener {
 
 
                 e.getWhoClicked().openInventory(inv);
-            }else if(e.getInventory().getItem(e.getSlot()).getType().equals(Material.BOW)){
+            }else if(e.getSlot()==16){
                 Inventory inv=Bukkit.createInventory(null,27,Utils.translate("&6Gadgets"));
                 ItemStack item=new ItemStack(Material.BOW);
                 ItemMeta meta=item.getItemMeta();
@@ -270,6 +287,111 @@ public class SpawnItemsManager implements Listener {
                 e.getWhoClicked().openInventory(inv);
 
 
+
+            }else if(e.getSlot()==13){
+
+                Inventory inv=Bukkit.createInventory(null,9,Utils.translate("&bPartículas"));
+                ItemStack item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDQ2MWQ5ZDA2YzBiZjRhN2FmNGIxNmZkMTI4MzFlMmJlMGNmNDJlNmU1NWU5YzBkMzExYTJhODk2NWEyM2IzNCJ9fX0=");
+                ItemMeta meta=item.getItemMeta();
+                meta.setDisplayName(Utils.translate("&6Lava"));
+                List<String> lore=new ArrayList<>();
+                lore.add("");
+                Jugador jugador=new JugadorUtils().getJugador(e.getWhoClicked().getName());
+                if(jugador.getBloquescomprados().contains(Material.LAVA)){
+                    lore.add(Utils.translate("&eEstado: &aADQUIRIDO"));
+                }else{
+                    lore.add(Utils.translate("&eEstado: &cNO ADQUIRIDO"));
+                }
+                lore.add(Utils.translate("&ePrecio: "+ ParticleUtils.getPrice(ParticleEffect.FLAME)));
+                lore.add("");
+                meta.setLore( lore);
+                item.setItemMeta(meta);
+                inv.setItem(2,item);
+
+
+
+                item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWIxZTIwNDEwYmI2YzdlNjk2OGFmY2QzZWM4NTU1MjBjMzdhNDBkNTRhNTRlOGRhZmMyZTZiNmYyZjlhMTkxNSJ9fX0=");
+
+                meta.setDisplayName(Utils.translate("&3Nota de música"));
+                lore.clear();
+
+                lore.add("");
+                if(jugador.getBloquescomprados().contains(Material.NOTE_BLOCK)){
+                    lore.add(Utils.translate("&eEstado: &aADQUIRIDO"));
+                }else{
+                    lore.add(Utils.translate("&eEstado: &cNO ADQUIRIDO"));
+                }
+                lore.add(Utils.translate("&ePrecio: "+ ParticleUtils.getPrice(ParticleEffect.NOTE)));
+                lore.add("");
+                meta.setLore( lore);
+                item.setItemMeta(meta);
+                inv.setItem(4,item);
+
+
+
+
+
+                item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjEyNjZiNzQ4MjQyMTE1YjMwMzcwOGQ1OWNlOWQ1NTIzYjdkNzljMTNmNmRiNGViYzkxZGQ0NzIwOWViNzU5YyJ9fX0=");
+                meta=item.getItemMeta();
+                meta.setDisplayName(Utils.translate("&cHeart"));
+                lore.clear();
+
+                lore.add("");
+                if(jugador.getBloquescomprados().contains(Material.RED_ROSE)){
+                    lore.add(Utils.translate("&eEstado: &aADQUIRIDO"));
+                }else{
+                    lore.add(Utils.translate("&eEstado: &cNO ADQUIRIDO"));
+                }
+                lore.add(Utils.translate("&ePrecio: "+ ParticleUtils.getPrice(ParticleEffect.HEART)));
+                lore.add("");
+                meta.setLore( lore);
+                item.setItemMeta(meta);
+                inv.setItem(3,item);
+
+
+
+                item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmJiMTI1NmViOWY2NjdjMDVmYjIxZTAyN2FhMWQ1MzU1OGJkYTc0ZTI0MGU0ZmE5ZTEzN2Q4NTFjNDE2ZmU5OCJ9fX0=");
+                meta=item.getItemMeta();
+                meta.setDisplayName(Utils.translate("&4Aldeano cabreado"));
+                lore.clear();
+
+                lore.add("");
+                if(jugador.getBloquescomprados().contains(Material.WORKBENCH)){
+                    lore.add(Utils.translate("&eEstado: &aADQUIRIDO"));
+                }else{
+                    lore.add(Utils.translate("&eEstado: &cNO ADQUIRIDO"));
+                }
+                lore.add(Utils.translate("&ePrecio: "+ ParticleUtils.getPrice(ParticleEffect.VILLAGER_ANGRY)));
+                lore.add("");
+                meta.setLore( lore);
+                item.setItemMeta(meta);
+                inv.setItem(5,item);
+
+
+
+                item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2QwZjFkMGE3NDU5OTFlNjYxNGZmZDdkYzlmODBlMzc0NTU5NmU4MTg5Nzc5NmYyODAyNjJmMTJmMTVlYjRhZCJ9fX0=");
+
+                meta=item.getItemMeta();
+                meta.setDisplayName(Utils.translate("&9Burbuja de agua"));
+                lore.clear();
+
+                lore.add("");
+                if(jugador.getBloquescomprados().contains(Material.WATER)){
+                    lore.add(Utils.translate("&eEstado: &aADQUIRIDO"));
+                }else{
+                    lore.add(Utils.translate("&eEstado: &cNO ADQUIRIDO"));
+                }
+                lore.add(Utils.translate("&ePrecio: "+ ParticleUtils.getPrice(ParticleEffect.WATER_BUBBLE)));
+                lore.add("");
+                meta.setLore( lore);
+                item.setItemMeta(meta);
+                inv.setItem(6,item);
+
+
+
+
+
+                e.getWhoClicked().openInventory(inv);
 
             }
 
@@ -403,6 +525,131 @@ public class SpawnItemsManager implements Listener {
                 }
 
             }
+        }else if(e.getInventory().getName().equalsIgnoreCase(Utils.translate("&bPartículas"))){
+            Jugador jugador=new JugadorUtils().getJugador(e.getWhoClicked().getName());
+            if(e.getSlot()==2){
+                if(jugador.getBloquescomprados().contains(Material.LAVA)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals( ParticleEffect.FLAME)){
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
+                        jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
+                    }else{
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.FLAME);
+                        jugador.getPlayer().sendMessage(Utils.translate("&aTe has equipado esta partícula"));
+                    }
+                }else{
+                    int price=ParticleUtils.getPrice( ParticleEffect.FLAME);
+                    if(jugador.getMonedas()>=price){
+                        jugador.getPlayer().sendMessage(Utils.translate("&aHas comprado esta partícula"));
+                        jugador.getPlayer().closeInventory();
+                        jugador.setMonedas(jugador.getMonedas()-price);
+                        jugador.getBloquescomprados().add(Material.LAVA);
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.FLAME);
+                    }else{
+                        e.getWhoClicked().closeInventory();
+                        jugador.getPlayer().sendMessage(Utils.translate("&cNo tienes suficiente dinero"));
+                    }
+            }
         }
+
+
+            if(e.getSlot()==3){
+                if(jugador.getBloquescomprados().contains(Material.RED_ROSE)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.HEART)){
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
+                        jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
+                    }else{
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.FLAME);
+                        jugador.getPlayer().sendMessage(Utils.translate("&aTe has equipado esta partícula"));
+                    }
+                }else{
+                    int price=ParticleUtils.getPrice(ParticleEffect.HEART);
+                    if(jugador.getMonedas()>=price){
+                        jugador.getPlayer().sendMessage(Utils.translate("&aHas comprado esta partícula"));
+                        jugador.getPlayer().closeInventory();
+                        jugador.setMonedas(jugador.getMonedas()-price);
+                        jugador.getBloquescomprados().add(Material.RED_ROSE);
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),ParticleEffect.HEART);
+                    }else{
+                        e.getWhoClicked().closeInventory();
+                        jugador.getPlayer().sendMessage(Utils.translate("&cNo tienes suficiente dinero"));
+                    }
+                }
+            }
+
+
+
+            if(e.getSlot()==4){
+                if(jugador.getBloquescomprados().contains(Material.NOTE_BLOCK)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.NOTE)){
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
+                        jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
+                    }else{
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.FLAME);
+                        jugador.getPlayer().sendMessage(Utils.translate("&aTe has equipado esta partícula"));
+                    }
+                }else{
+                    int price=ParticleUtils.getPrice(ParticleEffect.NOTE);
+                    if(jugador.getMonedas()>=price){
+                        jugador.getPlayer().sendMessage(Utils.translate("&aHas comprado esta partícula"));
+                        jugador.getPlayer().closeInventory();
+                        jugador.setMonedas(jugador.getMonedas()-price);
+                        jugador.getBloquescomprados().add(Material.NOTE_BLOCK);
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),ParticleEffect.NOTE);
+                    }else{
+                        e.getWhoClicked().closeInventory();
+                        jugador.getPlayer().sendMessage(Utils.translate("&cNo tienes suficiente dinero"));
+                    }
+                }
+            }
+
+            if(e.getSlot()==5){
+                if(jugador.getBloquescomprados().contains(Material.WORKBENCH)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.VILLAGER_ANGRY)){
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
+                        jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
+                    }else{
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.FLAME);
+                        jugador.getPlayer().sendMessage(Utils.translate("&aTe has equipado esta partícula"));
+                    }
+                }else{
+                    int price=ParticleUtils.getPrice(ParticleEffect.VILLAGER_ANGRY);
+                    if(jugador.getMonedas()>=price){
+                        jugador.getPlayer().sendMessage(Utils.translate("&aHas comprado esta partícula"));
+                        jugador.getPlayer().closeInventory();
+                        jugador.setMonedas(jugador.getMonedas()-price);
+                        jugador.getBloquescomprados().add(Material.WORKBENCH);
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),ParticleEffect.VILLAGER_ANGRY);
+                    }else{
+                        e.getWhoClicked().closeInventory();
+                        jugador.getPlayer().sendMessage(Utils.translate("&cNo tienes suficiente dinero"));
+                    }
+                }
+            }
+
+
+            if(e.getSlot()==6){
+                if(jugador.getBloquescomprados().contains(Material.WATER)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.WATER_BUBBLE)){
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
+                        jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
+                    }else{
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),ParticleEffect.WATER_BUBBLE);
+                        jugador.getPlayer().sendMessage(Utils.translate("&aTe has equipado esta partícula"));
+                    }
+                }else{
+                    int price=ParticleUtils.getPrice(ParticleEffect.WATER_BUBBLE);
+                    if(jugador.getMonedas()>=price){
+                        jugador.getPlayer().sendMessage(Utils.translate("&aHas comprado esta partícula"));
+                        jugador.getPlayer().closeInventory();
+                        jugador.setMonedas(jugador.getMonedas()-price);
+                        jugador.getBloquescomprados().add(Material.WATER);
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(),ParticleEffect.WATER_BUBBLE);
+                    }else{
+                        e.getWhoClicked().closeInventory();
+                        jugador.getPlayer().sendMessage(Utils.translate("&cNo tienes suficiente dinero"));
+                    }
+                }
+            }
+
     }
-}
+}}

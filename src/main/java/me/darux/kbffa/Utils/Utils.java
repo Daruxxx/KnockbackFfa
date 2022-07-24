@@ -20,4 +20,6 @@ public class Utils {
     public static int getMonedas(Jugador jugador){
         return jugador.getMonedas();
     }
+
+
 }

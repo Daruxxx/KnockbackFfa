@@ -17,6 +17,8 @@ import me.darux.kbffa.Item.SpeedManager;
 import me.darux.kbffa.Jugador.Jugador;
 import me.darux.kbffa.Jugador.JugadorJoin;
 import me.darux.kbffa.Scoreboard.ScoreboardAdmin;
+import me.darux.kbffa.Trails.ParticleManager;
+
 import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -47,6 +49,7 @@ public final class Main extends JavaPlugin {
         registerEvents();
         registerCommands();
         registerRunnables();
+        ParticleManager.run();
 
         ArenaUtils.cargarArenas(data);
         ScoreboardAdmin scoreboardAdmin=new ScoreboardAdmin();
