@@ -49,6 +49,7 @@ public final class Main extends JavaPlugin {
         registerEvents();
         registerCommands();
         registerRunnables();
+        Holograms.setup();
         ParticleManager.run();
 
         ArenaUtils.cargarArenas(data);

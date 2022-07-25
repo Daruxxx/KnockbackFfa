@@ -42,13 +42,13 @@ public class SpawnItemsManager implements Listener {
                         String nick=Main.getInstance().getData().getString("Jugadores."+key+".nick");
                         int kills=Main.getInstance().getData().getInt("Jugadores."+key+".kills");
                         killssinorden.add(new String[]{kills+"",nick});
-                        Bukkit.broadcastMessage("a");
+
 
 
                 }
 
                 List<String[]> topkills=Utils.kills(killssinorden);
-                Bukkit.broadcastMessage("   ");
+
 
 
                 List<String> lore=new ArrayList<>();
