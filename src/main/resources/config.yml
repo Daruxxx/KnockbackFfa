@@ -1,5 +1,9 @@
 JOIN-MESSAGE: "&8[&a+&8] &7%player% ha entrado al servidor"
 QUIT-MESSAGE: "&8[&c-&8] &7%player% ha salido del servidor"
+Inventories:
+  placeholders:
+    buyed: "&aADQUIRIDO"
+    no-buyed: "&cNO ADQUIRIDO"
 SCOREBOARD:
   title: "&b&lKBFFA"
   ticks: 20

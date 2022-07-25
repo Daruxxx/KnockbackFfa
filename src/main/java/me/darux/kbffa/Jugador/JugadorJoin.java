@@ -4,8 +4,13 @@ import me.darux.kbffa.File.FileCreator;
 import me.darux.kbffa.Main;
 import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -55,5 +60,16 @@ public class JugadorJoin implements Listener {
          data.save();
 
          Main.getInstance().getOnline().remove(jugador);
+    }
+    @EventHandler
+    public void a(EntityDamageEvent e){
+        if(e.getCause().equals(EntityDamageEvent.DamageCause.PROJECTILE)){
+            if(e.getEntity() instanceof Player){
+                Player p= (Player) e.getEntity();
+                if(!(new JugadorUtils().getJugador(p.getName()).isJugando())){
+                    e.setCancelled(true);
+                }
+            }
+        }
     }
 }

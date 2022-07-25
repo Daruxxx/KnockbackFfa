@@ -14,6 +14,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
@@ -63,10 +64,13 @@ public class EventCanceler implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getWhoClicked().getGameMode().equals(GameMode.CREATIVE))return;
+
+        if(e.getWhoClicked().getGameMode().equals(GameMode.CREATIVE) && e.getInventory().getName().startsWith("container."))return;
         if(e.getInventory().getName().equals(Utils.translate("&bOrdenar Inventario"))) return;
         e.setCancelled(true);
     }
+
+
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent e){

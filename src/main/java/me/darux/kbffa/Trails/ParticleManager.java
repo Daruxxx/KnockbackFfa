@@ -12,6 +12,9 @@ import java.util.Locale;
 
 public class ParticleManager {
     public static void run(){
+        if(Main.getInstance().getServer().getPluginManager().getPlugin("ParticleLIB") ==null){
+            return;
+        }
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
             @Override
             public void run() {
@@ -20,7 +23,7 @@ public class ParticleManager {
                     try{
                         if(ParticleUtils.getParticle(p) != null && !(ParticleUtils.getParticle(p).toString().equals("none"))){
                             Location location=p.getEyeLocation();
-                            location.setY(location.getY()+0.5);
+                            location.setY(location.getY()+1);
                             ParticleUtils.getParticle(p).send(Bukkit.getOnlinePlayers(), location, 0, 0, 0, 0, 1);
 
 

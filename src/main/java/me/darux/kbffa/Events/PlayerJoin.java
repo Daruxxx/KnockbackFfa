@@ -18,6 +18,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -49,6 +50,7 @@ public class PlayerJoin implements Listener {
                     TNTPrimed tnt = (TNTPrimed)p.getWorld().spawn(p.getEyeLocation(), TNTPrimed.class);
                     tnt.setVelocity(v.multiply(1.3D));
                     tnt.setFuseTicks(15);
+
                 ItemMeta meta=e.getPlayer().getItemInHand().getItemMeta();
                 new JugadorUtils().getJugador(e.getPlayer().getName()).setTntrestante(new JugadorUtils().getJugador(e.getPlayer().getName()).getTntrestante()-1);
                 meta.setDisplayName(Utils.translate("&cLanza tnt &8(&e"+new JugadorUtils().getJugador(e.getPlayer().getName()).getTntrestante() +"&8)"));
@@ -61,6 +63,11 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void a(EntityExplodeEvent e){
         e.blockList().clear();
+    }
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e){
+        new JugadorUtils().getJugador(e.getEntity().getName()).setTntrestante(2);
+        new JugadorUtils().getJugador(e.getEntity().getName()).setBolasrestantes(15);
     }
 
 

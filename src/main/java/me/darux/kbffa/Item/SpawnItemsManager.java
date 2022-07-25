@@ -14,8 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -38,14 +37,19 @@ public class SpawnItemsManager implements Listener {
                 ItemMeta meta=item.getItemMeta();
                 meta.setDisplayName(Utils.translate("&bTop kills"));
                 List<String[]> killssinorden=new ArrayList<>();
-                for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(true)){
-                    if(key.endsWith(".kills")){
-                        String nick=Main.getInstance().getData().getString("Jugadores."+key.replaceAll(".kills",".nick"));
-                        killssinorden.add(new String[]{Main.getInstance().getData().getInt("Jugadores."+key)+"",nick});
+                for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
 
-                    }
+                        String nick=Main.getInstance().getData().getString("Jugadores."+key+".nick");
+                        int kills=Main.getInstance().getData().getInt("Jugadores."+key+".kills");
+                        killssinorden.add(new String[]{kills+"",nick});
+                        Bukkit.broadcastMessage("a");
+
+
                 }
-                List<String[]> topkills=getJugadoresKills(killssinorden);
+
+                List<String[]> topkills=Utils.kills(killssinorden);
+                Bukkit.broadcastMessage("   ");
+
 
                 List<String> lore=new ArrayList<>();
                 List<String> loret=new ArrayList<>();
@@ -105,7 +109,7 @@ public class SpawnItemsManager implements Listener {
 
                     }
                 }
-               topkills=getJugadoresKills(killssinorden);
+               topkills=Utils.kills(killssinorden);
 
                 lore=new ArrayList<>();
                 loret=new ArrayList<>();
@@ -182,7 +186,10 @@ public class SpawnItemsManager implements Listener {
                 lore.add("");
                 meta.setLore(lore);
                 item.setItemMeta(meta);
-                inv.setItem(13,item);
+                if(Main.getInstance().getServer().getPluginManager().getPlugin("ParticleAPI") != null){
+                    inv.setItem(13,item);
+                }
+
 
 
 
@@ -431,6 +438,9 @@ public class SpawnItemsManager implements Listener {
     @EventHandler
     public void onClose(InventoryCloseEvent e){
         if(e.getInventory().getName().equals(Utils.translate("&bOrdenar Inventario"))){
+
+            Jugador jugador=new JugadorUtils().getJugador(e.getPlayer().getName());
+
             int bloques=1;
             int perla=8;
             int arco=4;
@@ -448,11 +458,13 @@ public class SpawnItemsManager implements Listener {
                         speed=i;
                     }else if(e.getInventory().getItem(i).getType().equals(Material.STICK)){
                         stick=i;
+                    }else if(e.getInventory().getItem(i).getType().equals(ItemUtils.largadistance(jugador.getLargaDistancia()).getType())){
+                        arco=i;
                     }
                 }
 
             }
-            Jugador jugador=new JugadorUtils().getJugador(e.getPlayer().getName());
+
             jugador.setBloquesslot(bloques);
             jugador.setPearlslot(perla);
             jugador.setTrhowslot(arco);
@@ -481,6 +493,11 @@ public class SpawnItemsManager implements Listener {
 
     @EventHandler
     public void onClaick(InventoryClickEvent e){
+        if(e.getInventory().getTitle().equals(Utils.translate("&bOrdenar Inventario"))){
+            if(e.getRawSlot()>8) e.setCancelled(true);
+            if(e.getClick().equals(ClickType.SHIFT_LEFT) || e.getClick().equals(ClickType.SHIFT_RIGHT)) e.setCancelled(true);
+
+        }
         if(e.getInventory().getName().equals(Utils.translate("&6Gadgets"))){
             Jugador jugador=new JugadorUtils().getJugador(e.getWhoClicked().getName());
             if(e.getSlot()==11){
