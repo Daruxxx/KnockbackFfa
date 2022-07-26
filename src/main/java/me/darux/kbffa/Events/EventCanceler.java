@@ -51,11 +51,11 @@ public class EventCanceler implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent e){
-        if(e.getPlayer().getLocation().getY()>100 && e.getTo().getY()<=100){
+        if(e.getPlayer().getLocation().getY()>85 && e.getTo().getY()<=85){
             e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.NOTE_PLING,10,10);
             JugadorUtils.comenzarJugar(e.getPlayer());
         }
-        if(e.getPlayer().getLocation().getY()>76 && e.getTo().getY()<=76){
+        if(e.getPlayer().getLocation().getY()>20 && e.getTo().getY()<=20){
             e.getPlayer().setHealth(0);
 
         }

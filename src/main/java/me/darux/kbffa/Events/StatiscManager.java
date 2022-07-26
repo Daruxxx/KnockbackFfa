@@ -27,14 +27,15 @@ public class StatiscManager implements Listener {
 
 
             if (e.getEntity().getKiller() != null) {
+                if (e.getEntity().getName().equals(e.getEntity().getKiller().getName())) return;
                 new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).aumentarkills();
                 new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).aumentarracha();
                 new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).sumarmonedas(Main.getInstance().getConfig().getInt("Monedas.kill"));
-                for(String key: Main.getInstance().getConfig().getConfigurationSection("Monedas.rachas").getKeys(false)){
-                    int racha=Integer.valueOf(key);
-                    if(racha==new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).getRacha()){
+                for (String key : Main.getInstance().getConfig().getConfigurationSection("Monedas.rachas").getKeys(false)) {
+                    int racha = Integer.valueOf(key);
+                    if (racha == new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).getRacha()) {
                         new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).sumarmonedas(
-                                Main.getInstance().getConfig().getInt("Monedas.rachas."+key)
+                                Main.getInstance().getConfig().getInt("Monedas.rachas." + key)
                         );
                     }
                 }
@@ -44,16 +45,9 @@ public class StatiscManager implements Listener {
         }
 
 
-    }
+    }}
 
 
 
-    @EventHandler
-    public void onMove(PlayerMoveEvent e){
-        if(e.getPlayer().getLocation().getY()>0 && e.getTo().getY()<=0){
-            e.getPlayer().setHealth(0);
 
 
-        }
-    }
-}

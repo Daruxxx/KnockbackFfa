@@ -8,12 +8,14 @@ import me.darux.kbffa.Main;
 import me.darux.kbffa.Trails.ParticleUtils;
 import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
@@ -186,7 +188,7 @@ public class SpawnItemsManager implements Listener {
                 lore.add("");
                 meta.setLore(lore);
                 item.setItemMeta(meta);
-                if(Main.getInstance().getServer().getPluginManager().getPlugin("ParticleAPI") != null){
+                if(Main.getInstance().getServer().getPluginManager().getPlugin("ParticleLIB") != null){
                     inv.setItem(13,item);
                 }
 
@@ -196,6 +198,10 @@ public class SpawnItemsManager implements Listener {
                 e.getPlayer().openInventory(inv);
             }
         }
+    }
+    @EventHandler
+    public void onBuild(BlockPlaceEvent e){
+        if(e.getBlock().getLocation().getY()>79 && e.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) e.setCancelled(true);
     }
 
     @EventHandler
@@ -546,7 +552,7 @@ public class SpawnItemsManager implements Listener {
             Jugador jugador=new JugadorUtils().getJugador(e.getWhoClicked().getName());
             if(e.getSlot()==2){
                 if(jugador.getBloquescomprados().contains(Material.LAVA)){
-                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals( ParticleEffect.FLAME)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked())!=null && ParticleUtils.getParticle((Player) e.getWhoClicked()).equals( ParticleEffect.FLAME)){
                         ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
                         jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
                     }else{
@@ -571,11 +577,11 @@ public class SpawnItemsManager implements Listener {
 
             if(e.getSlot()==3){
                 if(jugador.getBloquescomprados().contains(Material.RED_ROSE)){
-                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.HEART)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked())!=null && ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.HEART)){
                         ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
                         jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
                     }else{
-                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.FLAME);
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.HEART);
                         jugador.getPlayer().sendMessage(Utils.translate("&aTe has equipado esta partícula"));
                     }
                 }else{
@@ -597,11 +603,11 @@ public class SpawnItemsManager implements Listener {
 
             if(e.getSlot()==4){
                 if(jugador.getBloquescomprados().contains(Material.NOTE_BLOCK)){
-                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.NOTE)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked())!=null && ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.NOTE)){
                         ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
                         jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
                     }else{
-                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.FLAME);
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.NOTE);
                         jugador.getPlayer().sendMessage(Utils.translate("&aTe has equipado esta partícula"));
                     }
                 }else{
@@ -621,11 +627,11 @@ public class SpawnItemsManager implements Listener {
 
             if(e.getSlot()==5){
                 if(jugador.getBloquescomprados().contains(Material.WORKBENCH)){
-                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.VILLAGER_ANGRY)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked())!=null && ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.VILLAGER_ANGRY)){
                         ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
                         jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
                     }else{
-                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.FLAME);
+                        ParticleUtils.setParticle((Player) e.getWhoClicked(), ParticleEffect.VILLAGER_ANGRY);
                         jugador.getPlayer().sendMessage(Utils.translate("&aTe has equipado esta partícula"));
                     }
                 }else{
@@ -646,7 +652,7 @@ public class SpawnItemsManager implements Listener {
 
             if(e.getSlot()==6){
                 if(jugador.getBloquescomprados().contains(Material.WATER)){
-                    if(ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.WATER_BUBBLE)){
+                    if(ParticleUtils.getParticle((Player) e.getWhoClicked())!=null && ParticleUtils.getParticle((Player) e.getWhoClicked()).equals(ParticleEffect.WATER_BUBBLE)){
                         ParticleUtils.setParticle((Player) e.getWhoClicked(),null);
                         jugador.getPlayer().sendMessage(Utils.translate("&cTe has desequipado esta partícula"));
                     }else{

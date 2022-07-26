@@ -28,8 +28,8 @@ public class ArenaCMD implements CommandExecutor {
                 sender.sendMessage(Utils.translate("&3/arena create <name>"));
             }else{
                 String name=args[1];
-                if(p.getLocation().getY()<100){
-                    sender.sendMessage(Utils.translate("&cEl spawn de la arena tiene que estar por arriba de la cordenada 100"));
+                if(p.getLocation().getY()<85){
+                    sender.sendMessage(Utils.translate("&cEl spawn de la arena tiene que estar por arriba de la cordenada 85"));
                     return false;
                 }
 
@@ -46,16 +46,14 @@ public class ArenaCMD implements CommandExecutor {
                 if(arena==null){
                     sender.sendMessage(Utils.translate("&cEsta arena no existe"));
                 }else{
-                    if(p.getLocation().getY()<100){
-                        sender.sendMessage(Utils.translate("&cEl spawn de la arena tiene que estar por arriba de la cordenada 100"));
+                    if(p.getLocation().getY()<85){
+                        sender.sendMessage(Utils.translate("&cEl spawn de la arena tiene que estar por arriba de la cordenada 85"));
                     }else{
                         arena.setSpawn(p.getLocation());
                         sender.sendMessage(Utils.translate("&aHas cambiado el spawn de la arena &6"+arena.getNombre()+" &acorrectamente"));
                     }
                 }
             }
-        }else if(args[0].equals("tumadre")){
-            new JugadorUtils().getJugador(sender.getName()).setMonedas(1000);
         }
         return false;
     }
