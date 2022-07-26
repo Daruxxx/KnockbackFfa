@@ -17,6 +17,7 @@ import me.darux.kbffa.Item.SpawnItemsManager;
 import me.darux.kbffa.Item.SpeedManager;
 import me.darux.kbffa.Jugador.Jugador;
 import me.darux.kbffa.Jugador.JugadorJoin;
+import me.darux.kbffa.Rewards.RankRewardManager;
 import me.darux.kbffa.Scoreboard.ScoreboardAdmin;
 import me.darux.kbffa.Trails.ParticleManager;
 
@@ -117,6 +118,8 @@ public final class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new SpawnItemsManager(),this);
         this.getServer().getPluginManager().registerEvents(new PlayerJoin(),this);
         this.getServer().getPluginManager().registerEvents(new SnowBallThrower(),this);
+        this.getServer().getPluginManager().registerEvents(new RankRewardManager(),this);
+        this.getServer().getPluginManager().registerEvents(new RankRewardManager(),this);
 
     }
     private void registerCommands(){
