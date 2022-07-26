@@ -1,5 +1,6 @@
 package me.darux.kbffa.Item;
 
+import me.darux.kbffa.Jugador.JugadorUtils;
 import me.darux.kbffa.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -7,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -18,7 +20,7 @@ public class EnderPearlManager implements Listener {
 
     @EventHandler
     public void onTrhow(ProjectileLaunchEvent e){
-        if(e.getEntity().getType().equals(EntityType.ENDER_PEARL)){
+  /*     if(e.getEntity().getType().equals(EntityType.ENDER_PEARL)){
             Player p=(Player) e.getEntity().getShooter();
 
             if(cooldown.contains(p.getName())){
@@ -29,9 +31,21 @@ public class EnderPearlManager implements Listener {
                 cooldown.add(p.getName());
                 CooldownManager(p);
             }
+        }*/
+
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e){
+        if(e.getEntity().getKiller() instanceof Player){
+            if(e.getEntity().getKiller().getInventory().getItem(new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).getPearlslot()) !=null){
+                e.getEntity().getKiller().getInventory().getItem(new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).getPearlslot()).setAmount(e.getEntity().getKiller().getInventory().getItem(new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).getPearlslot()).getAmount()+1);
+            }else{
+                e.getEntity().getKiller().getInventory().setItem(new JugadorUtils().getJugador(e.getEntity().getKiller().getName()).getPearlslot(),new ItemStack(Material.ENDER_PEARL));
+            }
         }
     }
-    public void CooldownManager(Player p){
+  /*  public void CooldownManager(Player p){
         final int[] cuenta = {0};
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
             @Override
@@ -48,6 +62,6 @@ public class EnderPearlManager implements Listener {
                 }
             }
         },0,20);
-    }
+    }*/
 
 }

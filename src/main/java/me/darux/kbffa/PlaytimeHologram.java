@@ -18,9 +18,7 @@ public class PlaytimeHologram {
             playtimes.add(new String[]{playtime+"",nombre});
         }
         List<String[]> topplaytime= Utils.kills(playtimes);
-        for(int u=0;u<100;u++){
-            Bukkit.broadcastMessage("a ");
-        }
+
 
         for(int i=0;i<5;i++){
             int c=i+1;
@@ -47,9 +45,7 @@ public class PlaytimeHologram {
                         return TimeManager.timeformat(Integer.parseInt(topplaytime.get(finalI)[0]));
                     }
                 });
-                for(int u=0;u<100;u++){
-                    Bukkit.broadcastMessage("Hecho "+c);
-                }
+
 
                 HologramsAPI.registerPlaceholder(Main.getInstance(), "%playtime_" + c + "_name%", 20, new PlaceholderReplacer() {
                     @Override

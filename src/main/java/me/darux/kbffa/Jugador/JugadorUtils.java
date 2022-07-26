@@ -18,7 +18,6 @@ import java.util.List;
 public class JugadorUtils {
 
     public void crearJugador(Player p){
-        Bukkit.broadcastMessage("creado");
         Jugador jugador=new Jugador(p.getUniqueId().toString(),p.getName());
         Main.getInstance().getOnline().add(jugador);
     }

@@ -11,6 +11,7 @@ import me.darux.kbffa.Events.PlayerJoin;
 import me.darux.kbffa.Events.SpawnTeleportListener;
 import me.darux.kbffa.Events.StatiscManager;
 import me.darux.kbffa.File.FileCreator;
+import me.darux.kbffa.Item.BowManager;
 import me.darux.kbffa.Item.EnderPearlManager;
 import me.darux.kbffa.Item.LanzaNieve.SnowBallThrower;
 import me.darux.kbffa.Item.SpawnItemsManager;
@@ -53,6 +54,7 @@ public final class Main extends JavaPlugin {
         registerRunnables();
         Holograms.setup();
         ParticleManager.run();
+        BowManager.updateCooldowns();
 
         ArenaUtils.cargarArenas(data);
         ScoreboardAdmin scoreboardAdmin=new ScoreboardAdmin();
@@ -120,6 +122,7 @@ public final class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new SnowBallThrower(),this);
         this.getServer().getPluginManager().registerEvents(new RankRewardManager(),this);
         this.getServer().getPluginManager().registerEvents(new RankRewardManager(),this);
+        this.getServer().getPluginManager().registerEvents(new BowManager(),this);
 
     }
     private void registerCommands(){

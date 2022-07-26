@@ -33,6 +33,7 @@ public class Jugador {
     private int bolasrestantes;
     private List<Material> bloquescomprados;
     private int tntrestante;
+    private int bowcooldown;
 
 
     public Jugador(String UUID, String nick) {
@@ -55,6 +56,7 @@ public class Jugador {
         bloquescomprados.add(Material.STONE);
         bolasrestantes=15;
         tntrestante=2;
+        bowcooldown=0;
     }
 
     public boolean isJugando() {
@@ -241,5 +243,13 @@ public void aumentartiempo(){
 
     public void setTntrestante(int tntrestante) {
         this.tntrestante = tntrestante;
+    }
+
+    public int getBowcooldown() {
+        return bowcooldown;
+    }
+
+    public void setBowcooldown(int bowcooldown) {
+        this.bowcooldown = bowcooldown;
     }
 }

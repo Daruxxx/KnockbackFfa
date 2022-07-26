@@ -40,6 +40,7 @@ ELIMINAR-BLOQUES: 10 # Tiempo (en segundos) que tarda en eliminarse un bloque cu
 COOLDOWNS:
   ENDERPEARL: 10
   SPEED: 15
+  BOW: 5
 BLOQUES-PRECIO:
   STONE: 0
   COBBLESTONE: 10
