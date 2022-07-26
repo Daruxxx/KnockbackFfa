@@ -14,8 +14,6 @@ import org.bukkit.entity.Player;
 public class KbFfaCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if(!(sender instanceof Player)) return false;
-
         if(sender.isOp()){
             FileCreator data= Main.getInstance().getData();
             if(args.length==0){

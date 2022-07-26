@@ -131,6 +131,7 @@ public final class Main extends JavaPlugin {
         this.getCommand("suicide").setExecutor(new SuicideCmd());
         this.getCommand("playtime").setExecutor(new Playtime());
         config=new FileCreator(this,"config");
+        PlaytimeHologram.run();
     }
 
 
