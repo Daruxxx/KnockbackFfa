@@ -40,13 +40,20 @@ public class TimeManager {
     }
 
 
-    public static String timeformat(int sec){
-        int min=0;
-        while(sec>60){
-            sec=sec-60;
+    public static String timeformat(int sec) {
+        int min = 0;
+        int horas = 0;
+        while (sec > 59) {
+            sec = sec - 60;
             min++;
         }
-        if(min>=1){
+        while (min > 59) {
+            min = min - 60;
+            horas++;
+        }
+        if(horas>=1){
+            return horas+"horas "+min+"min "+sec+"s";
+        }else if(min>=1){
             return min+"min "+sec+"s";
         }else return sec+"s";
 
