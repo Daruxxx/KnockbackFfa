@@ -61,37 +61,44 @@ public static String getEntryFromScore(Objective o, int score) {
 
 
     public void showScoreboard(Player p) {
-        if(p.getScoreboard().equals(Main.getInstance().getServer().getScoreboardManager().getMainScoreboard())) p.setScoreboard(Main.getInstance().getServer().getScoreboardManager().getNewScoreboard()); //Per-player scoreboard, not necessary if all the same data, but we're personalizing the displayname and all
-        Scoreboard score = p.getScoreboard(); //Personalized scoreboard
-        Objective objective = score.getObjective(p.getName()) == null ? score.registerNewObjective(p.getName(), "dummy") : score.getObjective(p.getName()); //Per-player objectives, even though it doesn't matter what it's called since we're using per-player scoreboards.
-        String displayName = Main.getInstance().getConfig().getString("SCOREBOARD.title");
-        List<String> lineas=Main.getInstance().getConfig().getStringList("SCOREBOARD.lines");
-        objective.setDisplayName("\u00A7d\u00A7l" + displayName);
-        String arena="";
-        String tiempo="";
-        if(ArenaUtils.getEnabledArena() !=null){
-            arena=Objects.requireNonNull(ArenaUtils.getEnabledArena()).getNombre();
-            tiempo=TimeManager.timeformat(600-ArenaUtils.getEnabledArena().getTiempoactiva());
+        if(new JugadorUtils().getJugador(p.getName()).isScoreboard()){
+            if(p.getScoreboard().equals(Main.getInstance().getServer().getScoreboardManager().getMainScoreboard())) p.setScoreboard(Main.getInstance().getServer().getScoreboardManager().getNewScoreboard()); //Per-player scoreboard, not necessary if all the same data, but we're personalizing the displayname and all
+            Scoreboard score = p.getScoreboard(); //Personalized scoreboard
+            Objective objective = score.getObjective(p.getName()) == null ? score.registerNewObjective(p.getName(), "dummy") : score.getObjective(p.getName()); //Per-player objectives, even though it doesn't matter what it's called since we're using per-player scoreboards.
+            String displayName = Main.getInstance().getConfig().getString("SCOREBOARD.title");
+            List<String> lineas=Main.getInstance().getConfig().getStringList("SCOREBOARD.lines");
+            objective.setDisplayName(displayName);
+            String arena="";
+            String tiempo="";
+            if(ArenaUtils.getEnabledArena() !=null){
+                arena=Objects.requireNonNull(ArenaUtils.getEnabledArena()).getNombre();
+                tiempo=TimeManager.timeformat(600-ArenaUtils.getEnabledArena().getTiempoactiva());
 
+            }
+
+            for(int i=0;i<lineas.size();i++) {
+
+                replaceScore(objective,lineas.size()-i, lineas.get(i)
+
+                        .replaceAll("%kills%", new JugadorUtils().getJugador(p.getName()).getKills() + "")
+                        .replaceAll("%racha%", new JugadorUtils().getJugador(p.getName()).getRacha() + "")
+                        .replaceAll("%muertes%", new JugadorUtils().getJugador(p.getName()).getMuertes() + "")
+                        .replaceAll("%monedas%", new JugadorUtils().getJugador(p.getName()).getMonedas() + "")
+                        .replaceAll("%online%", Bukkit.getOnlinePlayers().size() + "")
+                        .replaceAll("%mapa%", arena)
+                        .replaceAll("%tiempo%", tiempo));
+            }
+
+
+
+            if(objective.getDisplaySlot() != DisplaySlot.SIDEBAR) objective.setDisplaySlot(DisplaySlot.SIDEBAR); //Vital functionality
+            p.setScoreboard(score);
+        }else{
+            p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
         }
 
-        for(int i=0;i<lineas.size();i++) {
 
-            replaceScore(objective,lineas.size()-i, lineas.get(i)
-
-                    .replaceAll("%kills%", new JugadorUtils().getJugador(p.getName()).getKills() + "")
-                    .replaceAll("%racha%", new JugadorUtils().getJugador(p.getName()).getRacha() + "")
-                    .replaceAll("%muertes%", new JugadorUtils().getJugador(p.getName()).getMuertes() + "")
-                    .replaceAll("%monedas%", new JugadorUtils().getJugador(p.getName()).getMonedas() + "")
-                    .replaceAll("%online%", Bukkit.getOnlinePlayers().size() + "")
-                    .replaceAll("%mapa%", arena)
-                    .replaceAll("%tiempo%", tiempo));
-        }
-
-
-
-        if(objective.getDisplaySlot() != DisplaySlot.SIDEBAR) objective.setDisplaySlot(DisplaySlot.SIDEBAR); //Vital functionality
-        p.setScoreboard(score); //Vital functionality
+//Vital functionality
 
 
     //////////////////

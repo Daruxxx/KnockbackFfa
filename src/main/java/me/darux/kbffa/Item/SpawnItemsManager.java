@@ -162,6 +162,23 @@ public class SpawnItemsManager implements Listener {
                 inv.setItem(10,item);
 
 
+
+                item=new ItemStack(Material.PAPER);
+                meta=item.getItemMeta();
+                meta.setDisplayName(Utils.translate("&6Activar/Desactivar scoreboard"));
+                lore.clear();
+                lore.add("");
+                if(new JugadorUtils().getJugador(e.getPlayer().getName()).isScoreboard()){
+                    lore.add(Utils.translate("&eEstado: &aACTIVADA"));
+                }else{
+                    lore.add(Utils.translate("&eEstado: &cDESACTIVADA"));
+                }
+                lore.add("");
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+                inv.setItem(22,item);
+
+
                 item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU0MzUyNjgwZDBiYjI5YjkxMzhhZjc4MzMwMWEzOTFiMzQwOTBjYjQ5NDFkNTJjMDg3Y2E3M2M4MDM2Y2I1MSJ9fX0=");
 
                 meta=item.getItemMeta();
@@ -208,6 +225,17 @@ public class SpawnItemsManager implements Listener {
     public void onClick(InventoryClickEvent e){
         if(e.getInventory().getName().equals(Utils.translate("&bAjustes"))){
             if(e.getInventory().getItem(e.getSlot())==null) return;
+            if(e.getSlot()==22){
+                if(new JugadorUtils().getJugador(e.getWhoClicked().getName()).isScoreboard()){
+                    new JugadorUtils().getJugador(e.getWhoClicked().getName()).setScoreboard(false);
+                    new JugadorUtils().getJugador(e.getWhoClicked().getName()).getPlayer().sendMessage(Utils.translate("&cHas desactivado la scoreboard"));
+
+                }else{
+                    new JugadorUtils().getJugador(e.getWhoClicked().getName()).setScoreboard(true);
+                    new JugadorUtils().getJugador(e.getWhoClicked().getName()).getPlayer().sendMessage(Utils.translate("&aHas activado la scoreboard"));
+
+                }
+            }
             if(e.getSlot()==10){
                 Inventory inv=Bukkit.createInventory(null,27,Utils.translate("&6Bloques"));
                 FileCreator config=Main.getInstance().getConfig();

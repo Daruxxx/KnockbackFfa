@@ -52,7 +52,7 @@ public class TimeManager {
             horas++;
         }
         if(horas>=1){
-            return horas+"horas "+min+"min "+sec+"s";
+            return horas+"h "+min+"min "+sec+"s";
         }else if(min>=1){
             return min+"min "+sec+"s";
         }else return sec+"s";

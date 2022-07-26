@@ -60,6 +60,9 @@ public class KbFfaCommand implements CommandExecutor {
                 }else sender.sendMessage(Utils.translate("&c/kbffa money <set/add/take> <player> <amount>"));
             }else if(args[0].equalsIgnoreCase("changemap")){
                 ArenaUtils.cambiararena();
+            }else if(args[0].equals("reload")){
+                Main.getInstance().getConfig().reload();
+                sender.sendMessage(Utils.translate("&aSe ha recargado la config"));
             }
         }else{
             sender.sendMessage(Utils.translate("&aKnockFfa core, creada por D4RUX :)"));
