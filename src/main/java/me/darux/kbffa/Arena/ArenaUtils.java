@@ -7,6 +7,7 @@ import me.darux.kbffa.Main;
 import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public class ArenaUtils {
 
@@ -46,6 +47,13 @@ public class ArenaUtils {
     }
 
     public static void cambiararena(){
+        Main.changes++;
+        if(Main.changes==18){
+            for(Player p : Bukkit.getOnlinePlayers()){
+                p.kickPlayer(Utils.translate("&eReiniciando el servidor"));
+            }
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"stop");
+        }
 
         Arena nuevaarena;
         ArenaUtils.getEnabledArena().setTiempoactiva(0);
@@ -70,6 +78,33 @@ public class ArenaUtils {
             jugador.setJugando(false);
             jugador.getPlayer().teleport(nuevaarena.getSpawn());
             jugador.getPlayer().sendTitle(Utils.translate("&a&lEl mapa ha sido cambiado"),"");
+            ItemUtils.setDefaultInv(jugador.getPlayer());
+
+        }
+    }
+
+
+    public static void cambiararenapornombre(String nombre){
+
+
+        Arena nuevaarena=Main.getInstance().getArenas().get(0);
+        for(Arena arena : Main.getInstance().getArenas()){
+            if(arena.getNombre().equalsIgnoreCase(nombre)){
+                nuevaarena=arena;
+            }
+        }
+
+
+
+
+
+
+        ArenaUtils.getEnabledArena().setActiva(false);
+        nuevaarena.setActiva(true);
+        for(Jugador jugador : Main.getInstance().getOnline()){
+            jugador.setJugando(false);
+            jugador.getPlayer().teleport(nuevaarena.getSpawn());
+            jugador.getPlayer().sendTitle(Utils.translate(Main.getInstance().getConfig().getString("ARENA-CHANGE.title")),Main.getInstance().getConfig().getString("ARENA-CHANGE.subtitle"));
             ItemUtils.setDefaultInv(jugador.getPlayer());
 
         }

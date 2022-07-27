@@ -83,3 +83,6 @@ REWARDS:
   kbffa.vip: 200
   kbffa.platinum: 300
   kbffa.infection: 700
+ARENA-CHANGE:
+  title: "&b&lLa arena ha sido cambiada"
+  subtitle: ""

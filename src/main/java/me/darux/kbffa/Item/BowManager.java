@@ -17,7 +17,10 @@ public class BowManager implements Listener {
     @EventHandler
     public void onShot(ProjectileLaunchEvent e){
 
+
+
         if(e.getEntity().getShooter() instanceof Player){
+            ((Player) e.getEntity().getShooter()).getItemInHand().setDurability((short) 0);
            Jugador jugador=new JugadorUtils().getJugador(((Player) e.getEntity().getShooter()).getName());
            if(jugador.getBowcooldown()!=0){
                e.setCancelled(true);

@@ -1,5 +1,7 @@
 package me.darux.kbffa.Item;
 
+import me.darux.kbffa.Arena.Arena;
+import me.darux.kbffa.Arena.ArenaUtils;
 import me.darux.kbffa.Enums.LargaDistancia;
 import me.darux.kbffa.File.FileCreator;
 import me.darux.kbffa.Jugador.Jugador;
@@ -8,6 +10,7 @@ import me.darux.kbffa.Main;
 import me.darux.kbffa.Trails.ParticleUtils;
 import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -178,6 +181,17 @@ public class SpawnItemsManager implements Listener {
                 item.setItemMeta(meta);
                 inv.setItem(22,item);
 
+                item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjliMjg4OTAyMDU4MzU2NWY4OGQ1MDUzNzg3MGM1OWFhZDgwMjU5NGZhYmQ4MzdlMWQxNGY1YTA2YWUzNDUwOSJ9fX0=");
+                meta=item.getItemMeta();
+                meta.setDisplayName(Utils.translate("&eCambiar mapa"));
+                lore.clear();
+                lore.add("");
+                lore.add(Utils.translate("&7Click para cambiar el mapa"));
+                lore.add("");
+                meta.setLore(lore);
+                item.setItemMeta(meta);
+                inv.setItem(22-18,item);
+
 
                 item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU0MzUyNjgwZDBiYjI5YjkxMzhhZjc4MzMwMWEzOTFiMzQwOTBjYjQ5NDFkNTJjMDg3Y2E3M2M4MDM2Y2I1MSJ9fX0=");
 
@@ -234,6 +248,21 @@ public class SpawnItemsManager implements Listener {
                     new JugadorUtils().getJugador(e.getWhoClicked().getName()).setScoreboard(true);
                     new JugadorUtils().getJugador(e.getWhoClicked().getName()).getPlayer().sendMessage(Utils.translate("&aHas activado la scoreboard"));
 
+                }
+            }
+            if(e.getSlot()==22-18){
+                if(e.getWhoClicked().hasPermission("kbffa.changemap")){
+                    Inventory inv=Bukkit.createInventory(null,9, Utils.translate("&eCambiar mapa"));
+                    for(Arena arena : Main.getInstance().getArenas()){
+                        ItemStack item=new ItemStack(Material.NETHER_STAR);
+                        ItemMeta meta=item.getItemMeta();
+                        meta.setDisplayName(Utils.translate("&e"+arena.getNombre()));
+                        item.setItemMeta(meta);
+                        inv.addItem(item);
+                        e.getWhoClicked().openInventory(inv);
+                    }
+                }else{
+                e.getWhoClicked().sendMessage(Utils.translate("&cNo tienes permisos para hacer esto"));
                 }
             }
             if(e.getSlot()==10){
@@ -465,6 +494,18 @@ public class SpawnItemsManager implements Listener {
                         jugador.getPlayer().closeInventory();
                     }
                 }
+            }
+        }else if(e.getInventory().getName().equals(Utils.translate("&eCambiar mapa"))){
+            if(e.getCursor() != null){
+                if(e.getInventory().getItem(e.getSlot() ) != null){
+                    if(ArenaUtils.getEnabledArena().getTiempoactiva()<120 && !(e.getWhoClicked().isOp())){
+                        e.getWhoClicked().sendMessage(Utils.translate("&cDebes esperar a que la arena lleve al menos dos minutos activa para poder cambiarla"));
+                        return;
+                    }
+                    String arena=ChatColor.stripColor(e.getInventory().getItem(e.getSlot()).getItemMeta().getDisplayName());
+                    ArenaUtils.cambiararenapornombre(arena);
+                }
+
             }
         }
     }

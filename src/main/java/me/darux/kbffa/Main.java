@@ -11,6 +11,8 @@ import me.darux.kbffa.Events.PlayerJoin;
 import me.darux.kbffa.Events.SpawnTeleportListener;
 import me.darux.kbffa.Events.StatiscManager;
 import me.darux.kbffa.File.FileCreator;
+import me.darux.kbffa.HolographicDisplaysApi.Holograms;
+import me.darux.kbffa.HolographicDisplaysApi.PlaytimeHologram;
 import me.darux.kbffa.Item.BowManager;
 import me.darux.kbffa.Item.EnderPearlManager;
 import me.darux.kbffa.Item.LanzaNieve.SnowBallThrower;
@@ -27,7 +29,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -41,26 +42,42 @@ public final class Main extends JavaPlugin {
     private static Main instance;
     private List<Arena> arenas=new ArrayList<>();
     List<Block> bloques=new ArrayList<>();
+    public static int changes=0;
 
 
 
     @Override
     public void onEnable() {
 
+
         instance=this;
+
         registerFiles();
+
         registerEvents();
+
         registerCommands();
+
         registerRunnables();
+
+
         Holograms.setup();
+
         ParticleManager.run();
+
         BowManager.updateCooldowns();
 
+
         ArenaUtils.cargarArenas(data);
+
         ScoreboardAdmin scoreboardAdmin=new ScoreboardAdmin();
+
         scoreboardAdmin.crearScore();
+
         TimeManager timeManager=new TimeManager();
+
         timeManager.tnt();
+        
     }
 
     @Override
@@ -134,6 +151,7 @@ public final class Main extends JavaPlugin {
         this.getCommand("suicide").setExecutor(new SuicideCmd());
         this.getCommand("playtime").setExecutor(new Playtime());
         config=new FileCreator(this,"config");
+
         PlaytimeHologram.run();
     }
 

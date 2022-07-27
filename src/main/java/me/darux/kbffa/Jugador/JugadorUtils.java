@@ -1,6 +1,7 @@
 package me.darux.kbffa.Jugador;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import me.darux.kbffa.Arena.ArenaUtils;
 import me.darux.kbffa.Enums.LargaDistancia;
 import me.darux.kbffa.File.FileCreator;
 import me.darux.kbffa.Item.ItemUtils;
@@ -20,6 +21,7 @@ public class JugadorUtils {
     public void crearJugador(Player p){
         Jugador jugador=new Jugador(p.getUniqueId().toString(),p.getName());
         Main.getInstance().getOnline().add(jugador);
+        jugador.getPlayer().teleport(ArenaUtils.getEnabledArena().getSpawn());
     }
 
     public void cargarJugador(Player p){

@@ -1,10 +1,11 @@
-package me.darux.kbffa;
+package me.darux.kbffa.HolographicDisplaysApi;
 
 import com.gmail.filoghost.holograms.api.HolographicDisplaysAPI;
 import com.gmail.filoghost.holographicdisplays.HolographicDisplays;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.placeholder.PlaceholderReplacer;
+import me.darux.kbffa.Main;
 import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
 
@@ -72,15 +73,18 @@ public class Holograms {
 */
 
             List<String[]> killssinorden=new ArrayList<>();
-            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
+            if(Main.getInstance().getData().getConfigurationSection("Jugadores") !=null){
+                for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
 
-                String nick=Main.getInstance().getData().getString("Jugadores."+key+".nick");
-                int kills=Main.getInstance().getData().getInt("Jugadores."+key+".kills");
-                killssinorden.add(new String[]{kills+"",nick});
+                    String nick=Main.getInstance().getData().getString("Jugadores."+key+".nick");
+                    int kills=Main.getInstance().getData().getInt("Jugadores."+key+".kills");
+                    killssinorden.add(new String[]{kills+"",nick});
 
 
 
+                }
             }
+
 
             List<String[]> topkills=Utils.kills(killssinorden);
 
