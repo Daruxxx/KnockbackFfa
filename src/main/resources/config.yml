@@ -19,7 +19,7 @@ SCOREBOARD:
     - "&1"
     - "&eJugando: &f%online%"
     - "&c"
-    - "&binfection.fun"
+    - "&boceanmc.es"
 STICK:
   name: "&6Palo mágico"
   lore:
@@ -71,7 +71,7 @@ Lanza-Nieve:
   glow: true
 Lanza-tnt:
   precio: 500
-  name: "&6LanzaTnt"
+  name: "&6Lanza Fuego"
 Particles:
   prices:
     LAVA: 150

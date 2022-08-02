@@ -15,16 +15,8 @@ import java.util.List;
 public class Holograms {
     public static void setup() {
         if (Main.getInstance().getServer().getPluginManager().getPlugin("HolographicDisplays") != null) {
-       /*     List<String[]> killssinorden=new ArrayList<>();
-            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
+            List<String[]> killssinorden=Utils.topkills();
 
-                String nick=Main.getInstance().getData().getString("Jugadores."+key+".nick");
-                int kills=Main.getInstance().getData().getInt("Jugadores."+key+".kills");
-                killssinorden.add(new String[]{kills+"",nick});
-
-
-
-            }
 
 
 
@@ -70,9 +62,9 @@ public class Holograms {
             }
         }
 
-*/
 
-            List<String[]> killssinorden=new ArrayList<>();
+
+         /*   List<String[]> killssinorden=new ArrayList<>();
             if(Main.getInstance().getData().getConfigurationSection("Jugadores") !=null){
                 for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
 
@@ -203,5 +195,5 @@ public class Holograms {
 
 
 
-        }
+       */ }
     }

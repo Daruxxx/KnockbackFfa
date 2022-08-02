@@ -10,6 +10,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class ArenaCMD implements CommandExecutor {
 
 
@@ -39,6 +43,15 @@ public class ArenaCMD implements CommandExecutor {
                 sender.sendMessage(Utils.translate("&aLa arena ha sido creada correctamente"));
             }
         }else if(args[0].equalsIgnoreCase("setspawn")){
+
+
+
+
+
+
+
+
+
             if(args.length<2){
                 sender.sendMessage(Utils.translate("&3/arena setspawn <arena>"));
             }else{

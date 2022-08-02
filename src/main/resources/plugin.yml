@@ -4,7 +4,7 @@ main: me.darux.kbffa.Main
 authors: [ D4RUX ]
 description: Core of KnockBackFFA
 website: https://daruxdev.es
-depend:
+softdepend:
   - HolographicDisplays
 commands:
   arena:

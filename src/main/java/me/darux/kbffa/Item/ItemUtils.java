@@ -83,7 +83,7 @@ public class ItemUtils {
         }else if(a.equals(LargaDistancia.LANZATNT)){
            ItemStack item=new ItemStack(Material.SHEARS);
            ItemMeta meta=item.getItemMeta();
-           meta.setDisplayName(Utils.translate("&cLanza tnt &8(&e2&8)"));
+           meta.setDisplayName(Utils.translate("&cLanza fuego &8(&e2&8)"));
             meta.addEnchant(Enchantment.DURABILITY,1,false);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             item.setItemMeta(meta);

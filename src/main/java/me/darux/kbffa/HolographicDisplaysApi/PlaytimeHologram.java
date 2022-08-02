@@ -12,14 +12,7 @@ import java.util.List;
 
 public class PlaytimeHologram {
     public static void run(){
-        List<String[]> playtimes=new ArrayList<>();
-        if(Main.getInstance().getData().getConfigurationSection("Jugadores") !=null){
-            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
-                String nombre=Main.getInstance().getData().getString("Jugadores."+key+".nick");
-                int playtime=Main.getInstance().getData().getInt("Jugadores."+key+".playtime");
-                playtimes.add(new String[]{playtime+"",nombre});
-            }
-        }
+List<String[]> playtimes=Utils.topplaytime();
 
 
 
@@ -59,7 +52,10 @@ public class PlaytimeHologram {
                         HologramsAPI.registerPlaceholder(Main.getInstance(), "%playtime_" + 3 + "_name%", 20, new PlaceholderReplacer() {
                             @Override
                             public String update() {
-                                return playtimes.get(2)[1];
+
+                                    return playtimes.get(2)[1];
+
+
                             }
                         });
 

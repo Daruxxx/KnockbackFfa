@@ -35,24 +35,13 @@ public class SpawnItemsManager implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
         if(e.getAction().equals(Action.RIGHT_CLICK_AIR)|| e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
-            if(new JugadorUtils().getJugador(e.getPlayer().getName()).isJugando()) return;
             if(e.getPlayer().getItemInHand().getType().equals(Material.PAPER)){
                 Inventory inv= Bukkit.createInventory(null,9*3, Utils.translate("&bTops"));
                 ItemStack item=ItemManager.crearSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2U0MGRkYWUzNTFjNjY3NGI4OGQ2YzZjOTc4ZDE4OGU0YmJlNTY5NGIyNWMxMjk4NWY0ZDA5NzZmMDY5MGU1ZSJ9fX0=");
                 ItemMeta meta=item.getItemMeta();
                 meta.setDisplayName(Utils.translate("&bTop kills"));
-                List<String[]> killssinorden=new ArrayList<>();
-                for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
 
-                        String nick=Main.getInstance().getData().getString("Jugadores."+key+".nick");
-                        int kills=Main.getInstance().getData().getInt("Jugadores."+key+".kills");
-                        killssinorden.add(new String[]{kills+"",nick});
-
-
-
-                }
-
-                List<String[]> topkills=Utils.kills(killssinorden);
+                List<String[]> topkills=Utils.topkills();
 
 
 
@@ -61,12 +50,13 @@ public class SpawnItemsManager implements Listener {
                 lore.add("");
                 lore.add("&c--------------------");
                 lore.add("");
-
                 for(int i=0;i<topkills.size();i++){
-                    if (i>5) return;
-                    int b=i+1;
-                    lore.add("&e"+b+" &8- &b"+topkills.get(i)[1]+" &8(&a"+topkills.get(i)[0]+"&8)");
-                }
+                    if (i<=5){
+                        int b=i+1;
+                        lore.add("&e"+b+" &8- &b"+topkills.get(i)[1]+" &8(&a"+topkills.get(i)[0]+"&8)");
+
+                    }
+               }
                 lore.add("");
                 lore.add("&c--------------------");
                 for(String a :lore){
@@ -106,15 +96,7 @@ public class SpawnItemsManager implements Listener {
 
 
 
-               killssinorden=new ArrayList<>();
-                for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(true)){
-                    if(key.endsWith(".muertes")){
-                        String nick=Main.getInstance().getData().getString("Jugadores."+key.replaceAll(".muertes",".nick"));
-                        killssinorden.add(new String[]{Main.getInstance().getData().getInt("Jugadores."+key)+"",nick});
-
-                    }
-                }
-               topkills=Utils.kills(killssinorden);
+               topkills=Utils.topmuertes();
 
                 lore=new ArrayList<>();
                 loret=new ArrayList<>();
@@ -123,10 +105,12 @@ public class SpawnItemsManager implements Listener {
                 lore.add("");
 
                 for(int i=0;i<topkills.size();i++){
-                    if (i>5) return;
-                    int b=i+1;
-                    lore.add("&e"+b+" &8- &b"+topkills.get(i)[1]+" &8(&a"+topkills.get(i)[0]+"&8)");
-                }
+                    if (i<=5) {
+                        int b=i+1;
+                        lore.add("&e"+b+" &8- &b"+topkills.get(i)[1]+" &8(&a"+topkills.get(i)[0]+"&8)");
+
+                    }
+               }
                 lore.add("");
                 lore.add("&c--------------------");
                 for(String a :lore){
@@ -136,6 +120,8 @@ public class SpawnItemsManager implements Listener {
                 item.setItemMeta(meta);
                 inv.setItem(15,item);
                 e.getPlayer().openInventory(inv);
+
+
             }else if(e.getPlayer().getItemInHand().getType().equals(Material.BLAZE_ROD)){
                 Inventory inv=Bukkit.createInventory(null,9,Utils.translate("&bOrdenar Inventario"));
                 Jugador jugador=new JugadorUtils().getJugador(e.getPlayer().getName());
@@ -227,6 +213,7 @@ public class SpawnItemsManager implements Listener {
 
 
                 e.getPlayer().openInventory(inv);
+
             }
         }
     }
@@ -601,7 +588,7 @@ public class SpawnItemsManager implements Listener {
                 if(jugador.getBloquescomprados().contains(Material.SHEARS)){
                     jugador.setLargaDistancia(LargaDistancia.LANZATNT);
                     jugador.getPlayer().closeInventory();
-                    jugador.getPlayer().sendMessage(Utils.translate("&aHas  seleccionado correctamente el lanza tnt"));
+                    jugador.getPlayer().sendMessage(Utils.translate("&aHas  seleccionado correctamente el lanza fuego"));
                 }else{
                     int precio=Main.getInstance().getConfig().getInt("Lanza-tnt.precio");
                     if(jugador.getMonedas()>=precio){
@@ -609,7 +596,7 @@ public class SpawnItemsManager implements Listener {
                         jugador.setLargaDistancia(LargaDistancia.LANZATNT);
                         jugador.getPlayer().closeInventory();
                         jugador.sumarmonedas(-precio);
-                        jugador.getPlayer().sendMessage(Utils.translate("&aHas comprado correctamente el lanza tnt"));
+                        jugador.getPlayer().sendMessage(Utils.translate("&aHas comprado correctamente el lanza fuego"));
                     }else{
                         jugador.getPlayer().closeInventory();
                         jugador.getPlayer().sendMessage(Utils.translate("&cNo tienes suficiente dinero para comprar este gadget"));

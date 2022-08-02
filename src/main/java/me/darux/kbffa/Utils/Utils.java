@@ -1,8 +1,12 @@
 package me.darux.kbffa.Utils;
 
 import me.darux.kbffa.Jugador.Jugador;
+import me.darux.kbffa.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Utils {
@@ -41,5 +45,98 @@ public class Utils {
 
         }
         return lista;
+    }
+
+    public static List<String[]> topplaytime(){
+        List<String[]> playtimes=new ArrayList<>();
+        if(Main.getInstance().getData().getConfigurationSection("Jugadores") !=null){
+            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
+                String nombre=Main.getInstance().getData().getString("Jugadores."+key+".nick");
+                int playtime=Main.getInstance().getData().getInt("Jugadores."+key+".playtime");
+                playtimes.add(new String[]{playtime+"",nombre});
+            }
+        }
+
+
+
+        List<Integer> lista=new ArrayList<>();
+        for(String[] a: playtimes){
+            lista.add(Integer.parseInt(a[0]));
+        }
+        Collections.sort(lista);
+        Collections.reverse(lista);
+
+        List<String[]> topplaytimes=new ArrayList<>();
+        for(Integer a: lista){
+            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
+                if(Main.getInstance().getData().getInt("Jugadores."+key+".playtime")==a){
+                    topplaytimes.add(new String[]{a+"",Main.getInstance().getData().getString("Jugadores."+key+".nick")});
+                }
+            }
+        }
+        return topplaytimes;
+    }
+
+
+    public static List<String[]> topkills(){
+        List<String[]> playtimes=new ArrayList<>();
+        if(Main.getInstance().getData().getConfigurationSection("Jugadores") !=null){
+            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
+                String nombre=Main.getInstance().getData().getString("Jugadores."+key+".nick");
+                int playtime=Main.getInstance().getData().getInt("Jugadores."+key+".kills");
+                playtimes.add(new String[]{playtime+"",nombre});
+            }
+        }
+
+
+
+        List<Integer> lista=new ArrayList<>();
+        for(String[] a: playtimes){
+            lista.add(Integer.parseInt(a[0]));
+        }
+        Collections.sort(lista);
+        Collections.reverse(lista);
+
+        List<String[]> topplaytimes=new ArrayList<>();
+        for(Integer a: lista){
+            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
+                if(Main.getInstance().getData().getInt("Jugadores."+key+".kills")==a){
+                    topplaytimes.add(new String[]{a+"",Main.getInstance().getData().getString("Jugadores."+key+".nick")});
+                }
+            }
+        }
+        return topplaytimes;
+    }
+
+
+
+    public static List<String[]> topmuertes(){
+        List<String[]> playtimes=new ArrayList<>();
+        if(Main.getInstance().getData().getConfigurationSection("Jugadores") !=null){
+            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
+                String nombre=Main.getInstance().getData().getString("Jugadores."+key+".nick");
+                int playtime=Main.getInstance().getData().getInt("Jugadores."+key+".muertes");
+                playtimes.add(new String[]{playtime+"",nombre});
+            }
+        }
+
+
+
+        List<Integer> lista=new ArrayList<>();
+        for(String[] a: playtimes){
+            lista.add(Integer.parseInt(a[0]));
+        }
+        Collections.sort(lista);
+        Collections.reverse(lista);
+
+        List<String[]> topplaytimes=new ArrayList<>();
+        for(Integer a: lista){
+            for(String key : Main.getInstance().getData().getConfigurationSection("Jugadores").getKeys(false)){
+                if(Main.getInstance().getData().getInt("Jugadores."+key+".muertes")==a){
+                    topplaytimes.add(new String[]{a+"",Main.getInstance().getData().getString("Jugadores."+key+".nick")});
+                }
+            }
+        }
+        return topplaytimes;
     }
 }

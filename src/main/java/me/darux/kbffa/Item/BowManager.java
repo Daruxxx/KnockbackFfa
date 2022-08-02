@@ -5,6 +5,8 @@ import me.darux.kbffa.Jugador.JugadorUtils;
 import me.darux.kbffa.Main;
 import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,6 +22,7 @@ public class BowManager implements Listener {
 
 
         if(e.getEntity().getShooter() instanceof Player){
+            if(e.getEntity() instanceof EnderPearl) return;
             ((Player) e.getEntity().getShooter()).getItemInHand().setDurability((short) 0);
            Jugador jugador=new JugadorUtils().getJugador(((Player) e.getEntity().getShooter()).getName());
            if(jugador.getBowcooldown()!=0){

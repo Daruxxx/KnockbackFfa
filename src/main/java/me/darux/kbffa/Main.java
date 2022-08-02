@@ -13,11 +13,8 @@ import me.darux.kbffa.Events.StatiscManager;
 import me.darux.kbffa.File.FileCreator;
 import me.darux.kbffa.HolographicDisplaysApi.Holograms;
 import me.darux.kbffa.HolographicDisplaysApi.PlaytimeHologram;
-import me.darux.kbffa.Item.BowManager;
-import me.darux.kbffa.Item.EnderPearlManager;
+import me.darux.kbffa.Item.*;
 import me.darux.kbffa.Item.LanzaNieve.SnowBallThrower;
-import me.darux.kbffa.Item.SpawnItemsManager;
-import me.darux.kbffa.Item.SpeedManager;
 import me.darux.kbffa.Jugador.Jugador;
 import me.darux.kbffa.Jugador.JugadorJoin;
 import me.darux.kbffa.Rewards.RankRewardManager;
@@ -43,11 +40,12 @@ public final class Main extends JavaPlugin {
     private List<Arena> arenas=new ArrayList<>();
     List<Block> bloques=new ArrayList<>();
     public static int changes=0;
-
+    public static List<Block> bloquesaborrar;
 
 
     @Override
     public void onEnable() {
+
 
 
         instance=this;
@@ -140,6 +138,7 @@ public final class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new RankRewardManager(),this);
         this.getServer().getPluginManager().registerEvents(new RankRewardManager(),this);
         this.getServer().getPluginManager().registerEvents(new BowManager(),this);
+        this.getServer().getPluginManager().registerEvents(new LanzaFuegos(),this);
 
     }
     private void registerCommands(){
@@ -183,6 +182,12 @@ public final class Main extends JavaPlugin {
 
     public List<Block> getBloques() {
         return bloques;
+    }
+
+    public List<Block> getbloquescopia(){
+        List<Block> bloquescopia=new ArrayList<>();
+        bloquescopia=bloques;
+        return bloquescopia;
     }
 }
 

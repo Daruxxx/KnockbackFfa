@@ -48,12 +48,13 @@ public class SpawnTeleportListener implements Listener {
     }
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e){
+        TimeManager.eliminarbloque(e.getBlockPlaced());
         if(e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) return;
         if(e.getPlayer().getItemInHand().getAmount()==1){
             e.setCancelled(true);
             return;
         }
-        TimeManager.eliminarbloque(e.getBlockPlaced());
+
         if(e.getBlock().getLocation().getY()>100) e.setCancelled(true);
 
 ;    }

@@ -68,7 +68,7 @@ public class TimeManager {
             public void run() {
 
                 tiempo[0]++;
-                if(tiempo[0]==0){
+                if(tiempo[0]==1){
                     Main.getInstance().getBloques().add(bloque);
                 }
                 if(tiempo[0]==Main.getInstance().getConfig().getInt("ELIMINAR-BLOQUES")){
@@ -94,7 +94,7 @@ public class TimeManager {
                                     if(jugador.getTntrestante()<2){
                                         jugador.setTntrestante(jugador.getTntrestante()+1);
                                         ItemMeta meta=jugador.getPlayer().getInventory().getItem(i).getItemMeta();
-                                        meta.setDisplayName(Utils.translate("&cLanza tnt &8(&e"+jugador.getTntrestante()+"&8)"));
+                                        meta.setDisplayName(Utils.translate("&cLanza fuego &8(&e"+jugador.getTntrestante()+"&8)"));
                                         jugador.getPlayer().getInventory().getItem(i).setItemMeta(meta);
                                     }
                                 }
@@ -103,7 +103,7 @@ public class TimeManager {
                     }
                 }
             }
-        },0,200);
+        },0,300);
     }
 
 }
