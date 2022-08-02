@@ -76,6 +76,12 @@ public class TimeManager {
                     Main.getInstance().getBloques().remove(bloque);
 
                 }
+                if(Main.borrartodos){
+                    Main.borrartodos=false;
+                    for(Block bloque : Main.getInstance().getBloques()){
+                        bloque.setType(Material.AIR);
+                    }
+                }
 
             }
         },0,20);
@@ -91,7 +97,7 @@ public class TimeManager {
                         for(int i=0;i<jugador.getPlayer().getInventory().getSize();i++){
                             if(jugador.getPlayer().getInventory().getItem(i) != null){
                                 if(jugador.getPlayer().getInventory().getItem(i).getType().equals(Material.SHEARS)){
-                                    if(jugador.getTntrestante()<2){
+                                    if(jugador.getTntrestante()<3){
                                         jugador.setTntrestante(jugador.getTntrestante()+1);
                                         ItemMeta meta=jugador.getPlayer().getInventory().getItem(i).getItemMeta();
                                         meta.setDisplayName(Utils.translate("&cLanza fuego &8(&e"+jugador.getTntrestante()+"&8)"));
@@ -103,7 +109,7 @@ public class TimeManager {
                     }
                 }
             }
-        },0,300);
+        },0,150);
     }
 
 }

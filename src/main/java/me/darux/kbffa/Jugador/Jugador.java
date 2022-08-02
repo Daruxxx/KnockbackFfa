@@ -55,7 +55,7 @@ public class Jugador {
         bloquescomprados=new ArrayList<Material>();
         bloquescomprados.add(Material.STONE);
         bolasrestantes=15;
-        tntrestante=2;
+        tntrestante=3;
         bowcooldown=0;
     }
 

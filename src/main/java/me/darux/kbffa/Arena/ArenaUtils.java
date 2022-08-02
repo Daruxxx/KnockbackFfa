@@ -85,10 +85,7 @@ public class ArenaUtils {
             ItemUtils.setDefaultInv(jugador.getPlayer());
 
         }
-        for(Block bloque:Main.getInstance().getbloquescopia()){
-            bloque.setType(Material.AIR);
-            Main.getInstance().getBloques().remove(bloque);
-        }
+        Main.borrartodos=true;
     }
 
 
@@ -120,10 +117,7 @@ public class ArenaUtils {
             ItemUtils.setDefaultInv(jugador.getPlayer());
 
         }
-        for(Block bloque:Main.getInstance().getbloquescopia()){
-            bloque.setType(Material.AIR);
-            Main.getInstance().getBloques().remove(bloque);
-        }
+        Main.borrartodos=true;
     }
 
     public static Arena getArena(String name){

@@ -41,6 +41,7 @@ public final class Main extends JavaPlugin {
     List<Block> bloques=new ArrayList<>();
     public static int changes=0;
     public static List<Block> bloquesaborrar;
+    public static boolean borrartodos=false;
 
 
     @Override
@@ -185,7 +186,7 @@ public final class Main extends JavaPlugin {
     }
 
     public List<Block> getbloquescopia(){
-        List<Block> bloquescopia=new ArrayList<>();
+        List<Block> bloquescopia;
         bloquescopia=bloques;
         return bloquescopia;
     }
