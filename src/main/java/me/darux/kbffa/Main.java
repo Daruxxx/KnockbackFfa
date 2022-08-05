@@ -4,6 +4,8 @@ import me.darux.kbffa.Arena.Arena;
 import me.darux.kbffa.Arena.ArenaCMD;
 import me.darux.kbffa.Arena.ArenaUtils;
 import me.darux.kbffa.Arena.KbFfaCommand;
+import me.darux.kbffa.Commands.GmcCommand;
+import me.darux.kbffa.Commands.GmsCommand;
 import me.darux.kbffa.Commands.Playtime;
 import me.darux.kbffa.Commands.SuicideCmd;
 import me.darux.kbffa.Events.EventCanceler;
@@ -150,6 +152,8 @@ public final class Main extends JavaPlugin {
         this.getCommand("kbffa").setExecutor(new KbFfaCommand());
         this.getCommand("suicide").setExecutor(new SuicideCmd());
         this.getCommand("playtime").setExecutor(new Playtime());
+        this.getCommand("gmc").setExecutor(new GmcCommand());
+        this.getCommand("gms").setExecutor(new GmsCommand());
         config=new FileCreator(this,"config");
 
         PlaytimeHologram.run();

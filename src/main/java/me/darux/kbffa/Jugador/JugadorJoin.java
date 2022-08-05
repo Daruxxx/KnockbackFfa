@@ -34,6 +34,9 @@ public class JugadorJoin implements Listener {
         e.setQuitMessage(Utils.translate(Main.getInstance().getConfig().getString("QUIT-MESSAGE").replaceAll("%player%",e.getPlayer().getName())));
          FileCreator data=Main.getInstance().getData();
          Jugador jugador=new JugadorUtils().getJugador(e.getPlayer().getName());
+         if(jugador.isJugando()){
+             jugador.getPlayer().setHealth(0);
+         }
 
          data.set("Jugadores."+jugador.getUUID().toString()+".nick",jugador.getNick());
          data.set("Jugadores."+jugador.getUUID().toString()+".kills",jugador.getKills());

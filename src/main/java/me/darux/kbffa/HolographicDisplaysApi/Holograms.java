@@ -26,8 +26,9 @@ public class Holograms {
 
                   String nombre = killssinorden.get(i)[1];
                   int kills = Integer.parseInt(killssinorden.get(i)[0]);
+                  int c=i+1;
 
-                  HologramsAPI.registerPlaceholder(Main.getInstance(), "%kbffa_topkills_" + i + "_name%", 20, new PlaceholderReplacer() {
+                  HologramsAPI.registerPlaceholder(Main.getInstance(), "%kbffa_topkills_" + c + "_name%", 20, new PlaceholderReplacer() {
                       @Override
                       public String update() {
                           return nombre;
@@ -35,7 +36,7 @@ public class Holograms {
                       }
                   });
 
-                  HologramsAPI.registerPlaceholder(Main.getInstance(), "%kbffa_topkills_" + i + "_kills%", 20, new PlaceholderReplacer() {
+                  HologramsAPI.registerPlaceholder(Main.getInstance(), "%kbffa_topkills_" + c + "_kills%", 20, new PlaceholderReplacer() {
                       @Override
                       public String update() {
                           return kills + "";

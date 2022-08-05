@@ -6,6 +6,7 @@ import me.darux.kbffa.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,10 +14,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.inventivetalent.particle.ParticleEffect;
 
@@ -63,6 +67,16 @@ public class EventCanceler implements Listener {
         if(e.getPlayer().getLocation().getY()>20 && e.getTo().getY()<=20){
             e.getPlayer().setHealth(0);
 
+        }
+    }
+
+    @EventHandler
+    public void onLogout(PlayerTeleportEvent e){
+
+        if(e.getCause().equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)){
+            if(e.getTo().getY()>79){
+                e.setCancelled(true);
+            }
         }
     }
 

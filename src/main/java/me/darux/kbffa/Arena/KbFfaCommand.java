@@ -63,7 +63,7 @@ public class KbFfaCommand implements CommandExecutor {
                 sender.sendMessage(Utils.translate("&aSe ha recargado la config"));
             }
         }else{
-            sender.sendMessage(Utils.translate("&aKnockFfa core, creada por D4RUX :)"));
+            sender.sendMessage(Utils.translate("&b&lKnockbackFFA &8| &fCreado por D4RUX."));
         }
         return false;
     }
